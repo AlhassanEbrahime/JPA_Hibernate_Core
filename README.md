@@ -29,6 +29,8 @@ Create a `persistence.xml` file in the `META-INF` directory:
     </persistence-unit>
 </persistence>
 
+```
+
 and the client `Main` will be like this :
 
 ```java
@@ -58,3 +60,4 @@ public class Main {
 
     }
 }
+```
