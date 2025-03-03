@@ -54,3 +54,137 @@ public class Main {
     }
 }
 ```
+
+### 2. Uisng Class:
+Create a backage `persistance` then create your Custom persistance class implements `PersistenceUnitInfo` interfce
+
+```java
+
+public class CustomPersistenceUnitInfo implements PersistenceUnitInfo {
+    @Override
+    public String getPersistenceUnitName() {
+        return "yor-persistence-unit";
+    }
+
+    @Override
+    public String getPersistenceProviderClassName() {
+        return "org.hibernate.jpa.HibernatePersistenceProvider";
+    }
+
+    @Override
+    public PersistenceUnitTransactionType getTransactionType() {
+        return PersistenceUnitTransactionType.RESOURCE_LOCAL;
+    }
+
+    @Override
+    public DataSource getJtaDataSource() {
+        return null;
+    }
+
+    @Override
+    public DataSource getNonJtaDataSource() {
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/TESTING_DB");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
+
+        return dataSource;
+    }
+
+    @Override
+    public List<String> getManagedClassNames() {
+        return List.of("org.project.entities.Demo");
+    }
+
+
+    @Override
+    public List<String> getMappingFileNames() {
+        return List.of();
+    }
+
+    @Override
+    public List<URL> getJarFileUrls() {
+        return List.of();
+    }
+
+    @Override
+    public URL getPersistenceUnitRootUrl() {
+        return null;
+    }
+
+    @Override
+    public boolean excludeUnlistedClasses() {
+        return false;
+    }
+
+    @Override
+    public SharedCacheMode getSharedCacheMode() {
+        return null;
+    }
+
+    @Override
+    public ValidationMode getValidationMode() {
+        return null;
+    }
+
+    @Override
+    public Properties getProperties() {
+        return null;
+    }
+
+    @Override
+    public String getPersistenceXMLSchemaVersion() {
+        return "";
+    }
+
+    @Override
+    public ClassLoader getClassLoader() {
+        return null;
+    }
+
+    @Override
+    public void addTransformer(ClassTransformer classTransformer) {
+
+    }
+
+    @Override
+    public ClassLoader getNewTempClassLoader() {
+        return null;
+    }
+}
+
+```
+
+You need to add a dependency in `pom.xml` to make hibernate connect to your `DBMS`
+
+```xml
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>6.2.1</version>
+        </dependency>
+```
+
+Then the `Main` will be like this:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        EntityManagerFactory emf = new HibernatePersistenceProvider()
+                .createContainerEntityManagerFactory(new CustomPersistenceUnitInfo(), new HashMap<>());
+        EntityManager em = emf.createEntityManager(); // represents the context
+
+        try {
+            em.getTransaction().begin();
+            Demo d = new Demo();
+            d.setId(2L);
+            d.setName("kabab");
+            em.persist(d); // add this to context  -> Not an insert query
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+    }
+}
+
+```
