@@ -27,8 +27,8 @@ public class Main {
 
             Demo d = new Demo();
 
-            d.setId(3L);
-            d.setName("Hawawshi");
+            d.setId(4L);
+            d.setName("falafel");
 
             em.persist(d); // add this to context  -> Not an insert query
 
