@@ -28,3 +28,33 @@ Create a `persistence.xml` file in the `META-INF` directory:
         </properties>
     </persistence-unit>
 </persistence>
+
+and the client `Main` will be like this :
+
+```java
+
+public class Main {
+    public static void main(String[] args) {
+
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
+
+        EntityManager em = emf.createEntityManager(); // represents the context
+
+        try {
+            em.getTransaction().begin();
+
+            Demo d = new Demo();
+
+            d.setId(2L);
+            d.setName("kabab");
+
+            em.persist(d); // add this to context  -> Not an insert query
+
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+
+    }
+}
