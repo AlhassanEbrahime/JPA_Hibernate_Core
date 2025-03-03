@@ -2,7 +2,6 @@
 
 ## Table of Contents
 - [Entities](#entities)
-- [Configuration](#configuration)
 
 ## Entities
 JPA/Hibernate can be configured in two ways:
