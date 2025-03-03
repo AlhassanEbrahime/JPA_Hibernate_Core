@@ -83,16 +83,19 @@ public class CustomPersistenceUnitInfo implements PersistenceUnitInfo {
 
     @Override
     public DataSource getNonJtaDataSource() {
+
+        //replace with your data base configuraion
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/TESTING_DB");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/Your database");
+        dataSource.setUsername("username");
+        dataSource.setPassword("password");
 
         return dataSource;
     }
 
     @Override
     public List<String> getManagedClassNames() {
+        //replace with your entity
         return List.of("org.project.entities.Demo");
     }
 
