@@ -56,14 +56,14 @@ public class Main {
 ```
 
 ### 2. Uisng Class:
-Create a backage `persistance` then create your Custom persistance class implements `PersistenceUnitInfo` interfce
+Create a backage `persistance` then create your Custom persistance class implements `PersistenceUnitInfo` interface
 
 ```java
 
 public class CustomPersistenceUnitInfo implements PersistenceUnitInfo {
     @Override
     public String getPersistenceUnitName() {
-        return "yor-persistence-unit";
+        return "my-persistence-unit";
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CustomPersistenceUnitInfo implements PersistenceUnitInfo {
     @Override
     public DataSource getNonJtaDataSource() {
 
-        //replace with your data base configuraion
+        //replace with your database configuraion
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/Your database");
         dataSource.setUsername("username");
