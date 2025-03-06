@@ -3,7 +3,7 @@
 ### 1-Persistent Context:
 ![Transaction Persistent Context](https://www.baeldung.com/wp-content/uploads/2019/11/transition-persistence-context.png)
 
-- Every change that happens to the Entity object int the transaction block remains in the context till the end of the transaction then a query is sent to the Database
+- Every change that happens to the Entity object in the transaction block remains in the context till the end of the transaction then a query is sent to the Database
 
 ``` java
     try{
@@ -42,3 +42,22 @@
 ```
 
 
+### 3- Hibernate properties
+
+- To view sql queries sent to the database
+
+``` java 
+      Map<String, String> props = new HashMap<>();
+        props.put("hibernate.show_sql","true");
+```
+- To view sql queries sent to the database
+
+
+- To make the updates to an Entity ( Table ) automatically
+
+``` java
+        Map<String, String> props = new HashMap<>();
+        props.put("hibernate.hbm2ddl.auto","update");
+        props.put("hibernate.hbm2ddl.auto","create");
+```
+- Note : Never use create in production; it drops the table and recreat it
