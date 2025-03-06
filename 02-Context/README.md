@@ -50,8 +50,6 @@
       Map<String, String> props = new HashMap<>();
         props.put("hibernate.show_sql","true");
 ```
-- To view sql queries sent to the database
-
 
 - To make the updates to an Entity ( Table ) automatically
 
