@@ -18,11 +18,11 @@ public class Main {
         EntityManager em = emf.createEntityManager(); // represents the context
         try{
             em.getTransaction().begin();
-            var e1 = em.getReference(Employee.class, 1);
-            e1.setName("name");
-            System.out.println("Before" + e1);
-            em.refresh(e1);
-            System.out.println("After" + e1);
+//            var e1 = em.getReference(Employee.class, 1);
+//            e1.setName("name");
+//            System.out.println("Before" + e1);
+//            em.refresh(e1);
+//            System.out.println("After" + e1);
 //            em.persist();     -> Adding an entity in the context
 //            em.find();        -> Finds by PK. Get from DB and add it to the context if it doesn't already exist
 //            em.remove();      -> Marking entity from removal
